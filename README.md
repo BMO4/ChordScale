@@ -1,4 +1,4 @@
-# ChordScale.py
+# ChordScalePlay.py
 -python program for music creation 
 -facillitate a user unaware of music theory to make music of coherent harmonic complexity
 -generates ChordScales as class ojects (families of scales and chords) 
