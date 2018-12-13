@@ -9,4 +9,5 @@
 * [r-p] play melodic scale note (one octave)
 * Intkey defines intervallic structure of scale (eg T=2 semitones, S=1 semitone, major scale=[T,T,S,T,T,T]=[2,2,1,2,2,2])
 * proof of concept in python, limitation of latency won't be overcome until implemented in compiled language eg C
+* required packages/modules pygame, pygame.midi, [t|T]kinter
 * NB: click in widget to focus/get started!
