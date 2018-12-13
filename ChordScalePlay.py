@@ -14,7 +14,7 @@
 # -[r-p] play melodic scale note (one octave)
 # -Intkey defines intervallic structure of scale (eg T=2 semitones, S=1 semitone, major scale=[T,T,S,T,T,T]=[2,2,1,2,2,2])
 # -proof of concept/s explored in python, anticipated that limitation of latency won't be overcome until implemented in compiled language eg C
-#
+#  NB: click in widget box to focus/get started!
 #############################################################################################################################
 class ChordScale:    
 
