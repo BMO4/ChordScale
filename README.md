@@ -1,5 +1,5 @@
 # ChordScale.py
--python program for music creation
+-python program for music creation 
 -facillitate a user unaware of music theory to make music of coherent harmonic complexity
 -generates ChordScales as class ojects (families of scales and chords) 
 -chords and scales (attributes) confined to one octave to facillitate voice leading, minimal large intervallic leaps
