@@ -1,8 +1,9 @@
-############################################################################################################################
+#############################################################################################################################################################
 #  ChordScalePlay.py
 #
 #  Author: Matt Crane
 #  Date:   10/12/2018
+#  Licence: GNU GPLv3.0
 #
 # -python program for music creation 
 # -facillitates a user unaware of music theory to make music of coherent harmonic complexity
@@ -15,7 +16,7 @@
 # -Intkey defines intervallic structure of scale (eg T=2 semitones, S=1 semitone, major scale=[T,T,S,T,T,T]=[2,2,1,2,2,2])
 # -proof of concept/s explored in python, anticipated that limitation of latency won't be overcome until implemented in compiled language eg C
 #  NB: click in widget box to focus/get started!
-#############################################################################################################################
+###########################################################################################################################################################
 class ChordScale:    
 
   def __init__(self, intkey, rt):
