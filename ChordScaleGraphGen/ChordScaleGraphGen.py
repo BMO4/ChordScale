@@ -12,8 +12,8 @@
 #   and melody with changing key
 #   Graph dictionaries can be edited to shape sequence generation (the main point)
 #
-# NB: Many issues/to dos eg only plays at 60bpm, chd needs to be changed when
-#     melnote played in different key,
+# NB: Many issues/to dos eg only plays at 60bpm(really 30bpm since unit is 1/8th note,
+#     chd needs to be changed when melnote played in different key,
 #     intkey to be included, noteoffs, proper pacakaging etc
 #     An initial proof of concept and learning project
 #     
