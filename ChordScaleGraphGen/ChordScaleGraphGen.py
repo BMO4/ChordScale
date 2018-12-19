@@ -162,9 +162,6 @@ while pygame.midi.time() < 1024000:
     
   Scale = ChordScale(intkey, rt)
   T = ((pygame.midi.time())//1000)
-#  CT = ((pygame.midi.time()//1000)-CT)
-#  MT = ((pygame.midi.time()//1000)-MT)
-#  RtT = ((pygame.midi.time()//1000)-RtT)
 
   if T == (CTsum):
       
