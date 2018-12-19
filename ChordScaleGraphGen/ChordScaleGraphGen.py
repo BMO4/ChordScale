@@ -200,7 +200,7 @@ while pygame.midi.time() < 1024000:
     print(melnote)
     
     print("MTsum: " + (str(MTsum)))
-
+    print("melnote: " + (str(melnote)))
     MTsum = (MTsum +(int(meltimestep)))
 
   elif T == (RtTsum):
@@ -208,9 +208,10 @@ while pygame.midi.time() < 1024000:
     rtimestep = (walkstep(RtTmeGph, rtimestep))
     gphrt = (walkstep(RtGph, gphrt))
     rt = (int(gphrt))
-
+   
     RtTsum = (RtTsum + (int(rtimestep)))
 
+    print("scale: " + (str(Scale.oneoctscale)))
     print("RtTsum: " + (str(RtTsum)))
     
   
