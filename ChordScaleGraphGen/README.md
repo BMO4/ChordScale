@@ -1,5 +1,4 @@
 **ChordScaleGraphGen.py**
-*
 *   Uses ChordScale to generate classes of chord scales
 *   Graph/networks then defined
 *   These graphs then used to generate random sequence of midi chords, bass note,
