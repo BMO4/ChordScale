@@ -153,8 +153,6 @@ print (pygame.midi.get_device_info(1))
 player = pygame.midi.Output(1)
 player.set_instrument(4)
 
-T = ((pygame.midi.time())//1000)
-
 while pygame.midi.time() < 1024000:
     
   Scale = ChordScale(intkey, rt)
