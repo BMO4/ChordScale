@@ -6,4 +6,4 @@
 *   Graph dictionaries can be edited to shape sequence generation (the main point)
 *   NB: Many issues/to dos eg only plays at 60bpm, chd needs to be changed when melnote played in different key, intkey to be included,  proper pacakaging etc
 *   An initial proof of concept and learning project
-*   An LLMS file configured to work with .py included in this folder- LLMSForTesting
+*   .py has midi channel configuration to work with LMMS file included in this folder- LLMSForTesting
