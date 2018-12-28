@@ -14,11 +14,13 @@
 #
 # NB: Many issues/to dos eg only plays at 60bpm(really 30bpm since unit is 1/8th note),
 #     chd needs to be changed when melnote played in different key,
-#     intkey to be included, noteoffs, proper pacakaging etc
+#     intkey to be included, pacakaging etc
 #     An initial proof of concept and learning project
 #     
 ########################################################################################################
-
+#
+#   chordscale class definition
+#
 
 class ChordScale:    
 
@@ -58,8 +60,7 @@ def chd_gen(scale):
   
   return(chds)
 
-
-
+#   graphs for generation
 
 ChdGraph = { "1" : ["1", "3", "4"],
              "2" : ["2", "3", "5"],
@@ -70,12 +71,12 @@ ChdGraph = { "1" : ["1", "3", "4"],
 #             "7" : ["1", "3", "5", "6"]
                                         }
 
-MelGraph = { "1" : ["1", "3", "2" ],
-             "2" : ["2", "3", "1" ],
+MelGraph = { "1" : ["1", "3", "2", "5", "6" ],
+             "2" : ["2", "3", "1", "5" ],
              "3" : ["3", "1", "2" ],
-             "4" : ["3", "2", "4" ],
-             "5" : ["3", "2", "1", "6"],
-             "6" : ["4", "5", "3", ]
+             "4" : ["3", "2", "4", "5", "6"],
+             "5" : ["3", "2", "1", "6", "5"],
+             "6" : ["4", "5", "3", "6" ]
 #             "7" : ["1", "3", "5", "6"]
                                         }
 
@@ -123,12 +124,16 @@ RtGph = {    "1" : ["1", "2", "3", "4", "5", "6", "7", "8", "9",  "10", "11", "1
              "12": ["1", "2", "3", "4", "5", "6", "7", "8", "9",  "10", "11", "12"]
                                                                                     }
 
+#   event loop
+
 import random
 
 def walkstep(graph, currentnode):
   currentnode = (random.choice(graph[currentnode]))
 
   return(currentnode)
+
+#initial values
 
 gphrt = "3"
 rt = (59 + (int(gphrt)))
@@ -150,21 +155,12 @@ root = Tk()
 pygame.midi.init()
 
 print (pygame.midi.get_device_info(1))
-player = pygame.midi.Output(1)
-player.set_instrument(4)
-
-T = ((pygame.midi.time())//1000)
-#MT = ((pygame.midi.time())//1000)
-#RtT = ((pygame.midi.time())//1000)
-
+player = pygame.midi.Output(4)
 
 while pygame.midi.time() < 1024000:
     
   Scale = ChordScale(intkey, rt)
   T = ((pygame.midi.time())//1000)
-#  CT = ((pygame.midi.time()//1000)-CT)
-#  MT = ((pygame.midi.time()//1000)-MT)
-#  RtT = ((pygame.midi.time()//1000)-RtT)
 
   if T == (CTsum):
       
@@ -180,10 +176,14 @@ while pygame.midi.time() < 1024000:
     chd = []
     chd = (Scale.chds[int(chddeg)])
     print("chd: " + (str(chd)))
+    for i in range(1,128):
+      player.note_off(i, channel=6)
     
     for i in chd:
-      player.note_on(i, velocity=95, channel=0)
-    player.note_on(((chd[0])-24), velocity=80, channel=0)
+      player.note_on(i, velocity=95, channel=6)
+    for i in range(1,128):
+      player.note_off(i,channel=7)
+    player.note_on(((chd[0])-24), velocity=80, channel=7)
     print("bs note: " + (str((chd[0])-24)))
 
     CTsum = (CTsum + (int(chdtimestep)))
@@ -196,11 +196,13 @@ while pygame.midi.time() < 1024000:
     meldeg = (walkstep(MelGraph, meldeg))
     melnote = ()
     melnote = (Scale.oneoctscale[int(meldeg)])
-    player.note_on(melnote, velocity=127, channel=0)
+    for i in range (1,128):
+      player.note_off(i,channel=9)
+    player.note_on(melnote, velocity=127, channel=9)
     print(melnote)
     
     print("MTsum: " + (str(MTsum)))
-
+    print("melnote: " + (str(melnote)))
     MTsum = (MTsum +(int(meltimestep)))
 
   elif T == (RtTsum):
@@ -208,13 +210,11 @@ while pygame.midi.time() < 1024000:
     rtimestep = (walkstep(RtTmeGph, rtimestep))
     gphrt = (walkstep(RtGph, gphrt))
     rt = (int(gphrt))
-
+   
     RtTsum = (RtTsum + (int(rtimestep)))
 
+    print("scale: " + (str(Scale.oneoctscale)))
     print("RtTsum: " + (str(RtTsum)))
     
   
 root.mainloop()
-
-      
-    
