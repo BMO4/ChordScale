@@ -11,4 +11,4 @@
 * proof of concept in python, limitation of latency won't be overcome until implemented in compiled language eg C
 * required packages/modules pygame, pygame.midi, [t|T]kinter
 * NB: click in widget to focus/get started!
-* (midi channels configured to work with LMMSForTesting in ChordScaleGraphGen folder)
+
