@@ -1,12 +1,11 @@
-#############################################################################################################################################################
+############################################################################################################################
 #  ChordScalePlay.py
 #
 #  Author: Matt Crane
 #  Date:   10/12/2018
-#  Licence: GNU GPLv3.0
 #
 # -python program for music creation 
-# -facillitates a user unaware of music theory to make music of coherent harmonic complexity
+# -facillitate a user unaware of music theory to make music of coherent harmonic complexity
 # -generates ChordScales as class ojects (families of scales and chords) 
 # -chords and scales (attributes) confined to one octave to facillitate voice leading, minimal large intervallic leaps
 # -maps these dynamically to qwerty keyboard
@@ -15,8 +14,8 @@
 # -[r-p] play melodic scale note (one octave)
 # -Intkey defines intervallic structure of scale (eg T=2 semitones, S=1 semitone, major scale=[T,T,S,T,T,T]=[2,2,1,2,2,2])
 # -proof of concept/s explored in python, anticipated that limitation of latency won't be overcome until implemented in compiled language eg C
-#  NB: click in widget box to focus/get started!
-###########################################################################################################################################################
+#
+#############################################################################################################################
 class ChordScale:    
 
   def __init__(self, intkey, rt):
@@ -65,9 +64,9 @@ root = Tk()
 
 pygame.midi.init()
 
-print (pygame.midi.get_device_info(1))
-player = pygame.midi.Output(1)
-player.set_instrument(4)
+print (pygame.midi.get_device_info(4))
+player = pygame.midi.Output(4)
+#player.set_instrument(4)
 
 
 
@@ -88,20 +87,26 @@ def key(event):
     print(Scale.rt)
 
   if event.char in ChordKeys:
+    for i in range(1,128):
+      player.note_off(i, channel=6)
     chd = []
     chd = (Scale.chds[int(ChordKeys.index(event.char))])
     print(chd)
     for i in chd:
-      player.note_on(i, velocity=95, channel=0)
-    player.note_on(((chd[0])-24), velocity=80, channel=0)
+      player.note_on(i, velocity=95, channel=6)
+    for i in range(1,128):
+      player.note_off(i,channel=7)
+    player.note_on(((chd[0])-24), velocity=80, channel=7)
     print((chd[0])-24)
     
       
   if event.char in ScaleKeys:
+    for i in range (1,128):
+      player.note_off(i,channel=9)
     melnote = ()
     melnote = (Scale.oneoctscale[int(ScaleKeys.index(event.char))])
     print(melnote)
-    player.note_on(melnote, velocity=127, channel=0)
+    player.note_on(melnote, velocity=127, channel=9)
     
 def callback(event):
     frame.focus_set()
@@ -109,6 +114,7 @@ def callback(event):
 
 
 frame = Frame(root, width=100, height=100)
+
 frame.bind("<Key>", key)
 frame.bind("<Button-1>", callback)
 frame.pack()
