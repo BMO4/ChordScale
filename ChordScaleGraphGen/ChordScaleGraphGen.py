@@ -62,10 +62,10 @@ def chd_gen(scale):
 
 #   graphs for generation
 
-ChdGraph = { "1" : ["1", "3", "4"],
-             "2" : ["2", "3", "5"],
+ChdGraph = { "1" : ["1", "3", "4", "2", "6"],
+             "2" : ["2", "3", "5", "4"],
              "3" : [ "1", "2", "4", "5"],
-             "4" : ["3", "2", ],
+             "4" : ["3", "2", "5", "4" ],
              "5" : ["3", "2", "1", "6"],
              "6" : ["4", "5", "3", ]
 #             "7" : ["1", "3", "5", "6"]
@@ -191,7 +191,8 @@ while pygame.midi.time() < 1024000:
     print("CTsum: " + (str(CTsum)))
 
   elif T == (MTsum):
-
+    
+    Scale = ChordScale(intkey, rt)
     meltimestep = (walkstep(MelTmeGph, meltimestep))
     meldeg = (walkstep(MelGraph, meldeg))
     melnote = ()
@@ -212,9 +213,36 @@ while pygame.midi.time() < 1024000:
     rt = (int(gphrt))
    
     RtTsum = (RtTsum + (int(rtimestep)))
+    Scale = ChordScale(intkey, rt)
 
     print("scale: " + (str(Scale.oneoctscale)))
     print("RtTsum: " + (str(RtTsum)))
+
+    chdtimestep =(walkstep(ChdTmeGph, chdtimestep))
+    print("chdtimestep: " + (chdtimestep))
+    print("ChdTmeGph: " + (str((ChdTmeGph[chdtimestep]))))
+
     
+    print("chddeg: " + chddeg)
+    print("ChdGraph: " + (str(ChdGraph[chddeg])))
+    chddeg = (walkstep(ChdGraph, chddeg))
+
+    chd = []
+    chd = (Scale.chds[int(chddeg)])
+    print("chd: " + (str(chd)))
+    for i in range(1,128):
+      player.note_off(i, channel=6)
+
+    CTsum = (CTsum + (int(chdtimestep)))
+    
+    print("CTsum: " + (str(CTsum)))
+    
+    for i in chd:
+      player.note_on(i, velocity=95, channel=6)
+    for i in range(1,128):
+      player.note_off(i,channel=7)
+    player.note_on(((chd[0])-24), velocity=80, channel=7)
+    print("bs note: " + (str((chd[0])-24)))
+ 
   
 root.mainloop()
