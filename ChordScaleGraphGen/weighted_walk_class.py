@@ -4,7 +4,7 @@
 ##      date:           june 2019
 ##      license:        GNU GPLv3.0
 ##      author:         matt crane
-##      description:    weighted walk fns  be converted to class and methods
+##      description:    weighted walk fns converted to class and methods
 ##                      for random weighted walks though graphs
 ##                      to be incorporated into music generation program
 ##                      (ChordScaleGraphGen)
